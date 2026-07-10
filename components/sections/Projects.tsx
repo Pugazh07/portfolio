@@ -13,18 +13,18 @@ export default function Projects() {
       <div className="max-w-2xl space-y-4">
         {projects.map((project, i) => (
           <Reveal delay={i * 100} key={project.name}>
-            <div className="rounded-lg border border-slate-800 bg-slate-900/40 p-6 transition-colors hover:border-teal-400/40">
-              <h3 className="text-lg font-semibold text-slate-100">
+            <div className="rounded-lg border border-[var(--border)] bg-[var(--bg-elevated)] p-6 transition-colors hover:border-[var(--accent)]/40">
+              <h3 className="text-lg font-semibold text-[var(--text-strong)]">
                 {project.name}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-400">
+              <p className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">
                 {project.description}
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full border border-slate-700 px-3 py-1 font-mono text-xs text-slate-400"
+                    className="rounded-full border border-[var(--border-strong)] px-3 py-1 font-mono text-xs text-[var(--text-muted)]"
                   >
                     {tag}
                   </span>
@@ -39,7 +39,7 @@ export default function Projects() {
             href={profile.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 font-mono text-sm text-teal-300 transition-colors hover:text-teal-200"
+            className="inline-flex items-center gap-2 font-mono text-sm text-[var(--accent)] transition-colors hover:opacity-80"
           >
             More on GitHub
             <ExternalLinkIcon className="h-4 w-4" />

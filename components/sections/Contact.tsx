@@ -17,7 +17,7 @@ export default function Contact() {
       </Reveal>
 
       <Reveal delay={100}>
-        <p className="max-w-xl text-base leading-relaxed text-slate-400">
+        <p className="max-w-xl text-base leading-relaxed text-[var(--text-muted)]">
           I&apos;m always open to interesting conversations — new roles,
           collaborations, or just talking shop about frontend architecture and
           AI-assisted development. Reach out and I&apos;ll get back to you.
@@ -27,7 +27,7 @@ export default function Contact() {
       <Reveal delay={200}>
         <a
           href={`mailto:${profile.email}`}
-          className="mt-8 inline-flex items-center gap-2 rounded-full border border-teal-400/60 px-6 py-3 font-mono text-sm text-teal-300 transition-colors hover:bg-teal-400/10"
+          className="mt-8 inline-flex items-center gap-2 rounded-full border border-[var(--accent)]/60 px-6 py-3 font-mono text-sm text-[var(--accent)] transition-colors hover:bg-[var(--accent)]/10"
         >
           <MailIcon className="h-4 w-4" />
           Say Hello
@@ -35,17 +35,17 @@ export default function Contact() {
       </Reveal>
 
       <Reveal delay={300}>
-        <div className="mt-10 flex flex-col gap-3 text-sm text-slate-400">
+        <div className="mt-10 flex flex-col gap-3 text-sm text-[var(--text-muted)]">
           <a
             href={`mailto:${profile.email}`}
-            className="flex items-center gap-3 transition-colors hover:text-teal-300"
+            className="flex items-center gap-3 transition-colors hover:text-[var(--accent)]"
           >
             <MailIcon className="h-4 w-4 shrink-0" />
             {profile.email}
           </a>
           <a
             href={`tel:${profile.phone.replace(/\s+/g, "")}`}
-            className="flex items-center gap-3 transition-colors hover:text-teal-300"
+            className="flex items-center gap-3 transition-colors hover:text-[var(--accent)]"
           >
             <PhoneIcon className="h-4 w-4 shrink-0" />
             {profile.phone}
@@ -58,7 +58,7 @@ export default function Contact() {
             href={profile.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 transition-colors hover:text-teal-300"
+            className="flex items-center gap-3 transition-colors hover:text-[var(--accent)]"
           >
             <GithubIcon className="h-4 w-4 shrink-0" />
             github.com/Pugazh07
@@ -67,7 +67,7 @@ export default function Contact() {
             href={profile.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 transition-colors hover:text-teal-300"
+            className="flex items-center gap-3 transition-colors hover:text-[var(--accent)]"
           >
             <LinkedinIcon className="h-4 w-4 shrink-0" />
             linkedin.com/in/pugazhenthiran
