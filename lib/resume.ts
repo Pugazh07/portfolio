@@ -24,7 +24,6 @@ export const nav = [
 
 export const highlights = [
   { label: "Years of experience", value: "7+" },
-  { label: "Test coverage achieved", value: "95%" },
   { label: "Faster delivery via AI workflows", value: "+40%" },
 ];
 

@@ -15,7 +15,7 @@ export default function About() {
         </p>
       </Reveal>
 
-      <Reveal delay={200}>
+      {/* <Reveal delay={200}>
         <dl className="mt-10 grid max-w-2xl grid-cols-3 gap-4">
           {highlights.map((item) => (
             <div
@@ -29,7 +29,7 @@ export default function About() {
             </div>
           ))}
         </dl>
-      </Reveal>
+      </Reveal> */}
 
       <Reveal delay={300}>
         <ul className="mt-8 max-w-2xl space-y-2">
