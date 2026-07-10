@@ -4,12 +4,13 @@ import { useEffect, useState } from "react";
 import { nav, profile } from "@/lib/resume";
 import {
   CloseIcon,
-  DownloadIcon,
+  ExternalLinkIcon,
   GithubIcon,
   LinkedinIcon,
   MailIcon,
   MenuIcon,
 } from "@/components/icons";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Sidebar() {
   const [active, setActive] = useState<string>(nav[0].id);
@@ -42,32 +43,35 @@ export default function Sidebar() {
   return (
     <>
       {/* Mobile top bar */}
-      <div className="sticky top-0 z-40 flex items-center justify-between border-b border-slate-800 bg-slate-950/90 px-6 py-4 backdrop-blur lg:hidden">
-        <a href="#top" className="font-mono text-sm text-slate-200">
+      <div className="sticky top-0 z-40 flex items-center justify-between border-b border-[var(--border)] bg-[var(--bg)]/90 px-6 py-4 backdrop-blur lg:hidden">
+        <a href="#top" className="font-mono text-sm text-[var(--text-strong)]">
           {profile.initials}
-          <span className="text-teal-400">.</span>
+          <span className="text-[var(--accent)]">.</span>
         </a>
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-label={open ? "Close menu" : "Open menu"}
-          className="text-slate-300"
-        >
-          {open ? <CloseIcon className="h-6 w-6" /> : <MenuIcon className="h-6 w-6" />}
-        </button>
+        <div className="flex items-center gap-3">
+          <ThemeToggle />
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            className="text-[var(--text)]"
+          >
+            {open ? <CloseIcon className="h-6 w-6" /> : <MenuIcon className="h-6 w-6" />}
+          </button>
+        </div>
       </div>
 
       {open && (
-        <div className="fixed inset-0 z-30 flex flex-col items-center justify-center gap-8 bg-slate-950/98 backdrop-blur lg:hidden">
+        <div className="fixed inset-0 z-30 flex flex-col items-center justify-center gap-8 bg-[var(--bg)]/98 backdrop-blur lg:hidden">
           <nav className="flex flex-col items-center gap-6">
             {nav.map((item, i) => (
               <a
                 key={item.id}
                 href={`#${item.id}`}
                 onClick={closeAndScroll}
-                className="font-mono text-lg text-slate-200"
+                className="font-mono text-lg text-[var(--text-strong)]"
               >
-                <span className="mr-2 text-teal-400">
+                <span className="mr-2 text-[var(--accent)]">
                   0{i + 1}.
                 </span>
                 {item.label}
@@ -76,10 +80,11 @@ export default function Sidebar() {
           </nav>
           <a
             href={profile.resumeUrl}
-            download
-            className="mt-4 flex items-center gap-2 rounded border border-teal-400/60 px-4 py-2 font-mono text-sm text-teal-300"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 flex items-center gap-2 rounded border border-[var(--accent)]/60 px-4 py-2 font-mono text-sm text-[var(--accent)]"
           >
-            <DownloadIcon className="h-4 w-4" />
+            <ExternalLinkIcon className="h-4 w-4" />
             Resume
           </a>
         </div>
@@ -91,13 +96,16 @@ export default function Sidebar() {
         className="hidden lg:fixed lg:inset-y-0 lg:left-0 lg:flex lg:w-[26rem] lg:flex-col lg:justify-between lg:px-16 lg:py-20 xl:px-24"
       >
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-slate-100 xl:text-4xl">
-            {profile.name}
-          </h1>
-          <p className="mt-3 text-lg font-medium text-teal-400">
+          <div className="flex items-start justify-between gap-4">
+            <h1 className="text-3xl font-bold tracking-tight text-[var(--text-strong)] xl:text-4xl">
+              {profile.name}
+            </h1>
+            <ThemeToggle className="mt-1 shrink-0" />
+          </div>
+          <p className="mt-3 text-lg font-medium text-[var(--accent)]">
             {profile.title}
           </p>
-          <p className="mt-4 max-w-xs text-sm leading-relaxed text-slate-400">
+          <p className="mt-4 max-w-xs text-sm leading-relaxed text-[var(--text-muted)]">
             {profile.tagline}
           </p>
 
@@ -114,15 +122,15 @@ export default function Sidebar() {
                       <span
                         className={`h-px transition-all ${
                           isActive
-                            ? "w-10 bg-teal-400"
-                            : "w-5 bg-slate-700 group-hover:w-10 group-hover:bg-slate-400"
+                            ? "w-10 bg-[var(--accent)]"
+                            : "w-5 bg-[var(--border-strong)] group-hover:w-10 group-hover:bg-[var(--text-muted)]"
                         }`}
                       />
                       <span
                         className={`font-mono text-xs tracking-widest transition-colors ${
                           isActive
-                            ? "text-teal-300"
-                            : "text-slate-500 group-hover:text-slate-300"
+                            ? "text-[var(--accent)]"
+                            : "text-[var(--text-faint)] group-hover:text-[var(--text)]"
                         }`}
                       >
                         0{i + 1}
@@ -130,8 +138,8 @@ export default function Sidebar() {
                       <span
                         className={`text-sm font-medium transition-colors ${
                           isActive
-                            ? "text-slate-100"
-                            : "text-slate-500 group-hover:text-slate-200"
+                            ? "text-[var(--text-strong)]"
+                            : "text-[var(--text-faint)] group-hover:text-[var(--text-strong)]"
                         }`}
                       >
                         {item.label}
@@ -145,21 +153,22 @@ export default function Sidebar() {
 
           <a
             href={profile.resumeUrl}
-            download
-            className="mt-10 inline-flex items-center gap-2 rounded border border-slate-700 px-4 py-2.5 text-sm font-medium text-slate-300 transition-colors hover:border-teal-400/60 hover:text-teal-300"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-10 inline-flex items-center gap-2 rounded border border-[var(--border-strong)] px-4 py-2.5 text-sm font-medium text-[var(--text)] transition-colors hover:border-[var(--accent)]/60 hover:text-[var(--accent)]"
           >
-            <DownloadIcon className="h-4 w-4" />
-            Download Resume
+            <ExternalLinkIcon className="h-4 w-4" />
+            View Resume
           </a>
         </div>
 
-        <div className="flex items-center gap-5 text-slate-400">
+        <div className="flex items-center gap-5 text-[var(--text-muted)]">
           <a
             href={profile.github}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
-            className="transition-colors hover:text-teal-300"
+            className="transition-colors hover:text-[var(--accent)]"
           >
             <GithubIcon className="h-5 w-5" />
           </a>
@@ -168,14 +177,14 @@ export default function Sidebar() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            className="transition-colors hover:text-teal-300"
+            className="transition-colors hover:text-[var(--accent)]"
           >
             <LinkedinIcon className="h-5 w-5" />
           </a>
           <a
             href={`mailto:${profile.email}`}
             aria-label="Email"
-            className="transition-colors hover:text-teal-300"
+            className="transition-colors hover:text-[var(--accent)]"
           >
             <MailIcon className="h-5 w-5" />
           </a>

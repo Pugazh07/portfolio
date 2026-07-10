@@ -1,30 +1,68 @@
 @import "tailwindcss";
 
-:root {
-  --background: #020617;
-  --foreground: #cbd5e1;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #020617;
+  --bg-elevated: #0f172a;
+  --border: #1e293b;
+  --border-strong: #334155;
+  --text-strong: #f1f5f9;
+  --text: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-faint: #64748b;
+  --accent: #2dd4bf;
+  --scrollbar-track: #020617;
+  --scrollbar-thumb: #1e293b;
+  --scrollbar-thumb-hover: #334155;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --bg: #ffffff;
+  --bg-elevated: #f8fafc;
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --text-strong: #0f172a;
+  --text: #334155;
+  --text-muted: #475569;
+  --text-faint: #64748b;
+  --accent: #0d9488;
+  --scrollbar-track: #f8fafc;
+  --scrollbar-thumb: #cbd5e1;
+  --scrollbar-thumb-hover: #94a3b8;
+}
+
 html {
   scroll-behavior: smooth;
-  color-scheme: dark;
+}
+
+.theme-icon-sun,
+.theme-icon-moon {
+  display: none;
+}
+
+[data-theme="dark"] .theme-icon-sun {
+  display: inline-flex;
+}
+
+[data-theme="light"] .theme-icon-moon {
+  display: inline-flex;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--bg);
+  color: var(--text);
 }
 
 ::selection {
-  background: #2dd4bf;
-  color: #020617;
+  background: var(--accent);
+  color: var(--bg);
 }
 
 ::-webkit-scrollbar {
@@ -32,14 +70,14 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #020617;
+  background: var(--scrollbar-track);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: var(--scrollbar-thumb);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: var(--scrollbar-thumb-hover);
 }
