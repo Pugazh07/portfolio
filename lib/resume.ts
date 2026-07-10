@@ -7,7 +7,7 @@ export const profile = {
   phone: "+91 95241 25876",
   github: "https://github.com/Pugazh07",
   linkedin: "https://linkedin.com/in/pugazhenthiran",
-  resumeUrl: "/resume.pdf",
+  resumeUrl: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/resume.pdf`,
   tagline:
     "I build fast, accessible, and maintainable frontend systems — and use AI to build them faster.",
   summary:
