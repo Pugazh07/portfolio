@@ -135,6 +135,13 @@ export const skillGroups = [
 
 export const projects = [
   {
+    name: "Loan Dashboard",
+    description:
+      "Personal loan tracking dashboard for balances, EMI schedules, amortization breakdowns, and multi-loan comparison.",
+    tags: ["Next.js", "Supabase", "TypeScript", "Recharts"],
+    liveUrl: "https://loan-dashboard-three-phi.vercel.app",
+  },
+  {
     name: "AI Automation Script Generator",
     description:
       "An LLM-powered internal tool that generates automation scripts from plain-language test steps, cutting QA effort by 50%.",
