@@ -14,9 +14,22 @@ export default function Projects() {
         {projects.map((project, i) => (
           <Reveal delay={i * 100} key={project.name}>
             <div className="rounded-lg border border-[var(--border)] bg-[var(--bg-elevated)] p-6 transition-colors hover:border-[var(--accent)]/40">
-              <h3 className="text-lg font-semibold text-[var(--text-strong)]">
-                {project.name}
-              </h3>
+              <div className="flex items-start justify-between gap-4">
+                <h3 className="text-lg font-semibold text-[var(--text-strong)]">
+                  {project.name}
+                </h3>
+                {"liveUrl" in project && project.liveUrl && (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex shrink-0 items-center gap-1 font-mono text-xs text-[var(--accent)] transition-colors hover:opacity-80"
+                  >
+                    Live site
+                    <ExternalLinkIcon className="h-3.5 w-3.5" />
+                  </a>
+                )}
+              </div>
               <p className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">
                 {project.description}
               </p>
