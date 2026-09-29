@@ -36,9 +36,9 @@ export default function About() {
           {achievements.map((item) => (
             <li
               key={item}
-              className="flex items-start gap-2 text-sm text-[var(--text-muted)]"
+              className="group flex items-start gap-2 text-sm text-[var(--text-muted)] transition-colors hover:text-[var(--text-strong)]"
             >
-              <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]" />
+              <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)] transition-transform duration-300 group-hover:scale-150" />
               {item}
             </li>
           ))}
