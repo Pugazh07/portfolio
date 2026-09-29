@@ -38,6 +38,19 @@ export default function Sidebar() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
   const closeAndScroll = () => setOpen(false);
 
   return (
@@ -54,22 +67,35 @@ export default function Sidebar() {
             type="button"
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Close menu" : "Open menu"}
-            className="text-[var(--text)]"
+            aria-expanded={open}
+            className="relative h-6 w-6 text-[var(--text)]"
           >
-            {open ? <CloseIcon className="h-6 w-6" /> : <MenuIcon className="h-6 w-6" />}
+            <MenuIcon
+              className={`absolute inset-0 h-6 w-6 transition-all duration-300 ${
+                open ? "rotate-90 scale-50 opacity-0" : "rotate-0 scale-100 opacity-100"
+              }`}
+            />
+            <CloseIcon
+              className={`absolute inset-0 h-6 w-6 transition-all duration-300 ${
+                open ? "rotate-0 scale-100 opacity-100" : "-rotate-90 scale-50 opacity-0"
+              }`}
+            />
           </button>
         </div>
       </div>
 
       {open && (
-        <div className="fixed inset-0 z-30 flex flex-col items-center justify-center gap-8 bg-[var(--bg)]/98 backdrop-blur lg:hidden">
+        <div className="menu-overlay fixed inset-0 z-30 flex flex-col items-center justify-center gap-8 bg-[var(--bg)]/95 backdrop-blur-md lg:hidden">
           <nav className="flex flex-col items-center gap-6">
             {nav.map((item, i) => (
               <a
                 key={item.id}
                 href={`#${item.id}`}
                 onClick={closeAndScroll}
-                className="font-mono text-lg text-[var(--text-strong)]"
+                style={{ animationDelay: `${80 + i * 60}ms` }}
+                className={`fade-up font-mono text-lg transition-colors hover:text-[var(--accent)] ${
+                  active === item.id ? "text-[var(--accent)]" : "text-[var(--text-strong)]"
+                }`}
               >
                 <span className="mr-2 text-[var(--accent)]">
                   0{i + 1}.
@@ -82,7 +108,8 @@ export default function Sidebar() {
             href={profile.resumeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 flex items-center gap-2 rounded border border-[var(--accent)]/60 px-4 py-2 font-mono text-sm text-[var(--accent)]"
+            style={{ animationDelay: `${80 + nav.length * 60}ms` }}
+            className="fade-up btn-shine mt-4 flex items-center gap-2 rounded-full border border-[var(--accent)]/60 px-5 py-2 font-mono text-sm text-[var(--accent)]"
           >
             <ExternalLinkIcon className="h-4 w-4" />
             Resume
@@ -96,20 +123,29 @@ export default function Sidebar() {
         className="hidden lg:fixed lg:inset-y-0 lg:left-0 lg:flex lg:w-[26rem] lg:flex-col lg:justify-between lg:px-16 lg:py-20 xl:px-24"
       >
         <div>
-          <div className="flex items-start justify-between gap-4">
-            <h1 className="text-3xl font-bold tracking-tight text-[var(--text-strong)] xl:text-4xl">
+          <div
+            className="fade-up flex items-start justify-between gap-4"
+            style={{ animationDelay: "0ms" }}
+          >
+            <h1 className="text-gradient text-3xl font-bold tracking-tight xl:text-4xl">
               {profile.name}
             </h1>
             <ThemeToggle className="mt-1 shrink-0" />
           </div>
-          <p className="mt-3 text-lg font-medium text-[var(--accent)]">
+          <p
+            className="fade-up mt-3 text-lg font-medium text-[var(--accent)]"
+            style={{ animationDelay: "200ms" }}
+          >
             {profile.title}
           </p>
-          <p className="mt-4 max-w-xs text-sm leading-relaxed text-[var(--text-muted)]">
+          <p
+            className="fade-up mt-4 max-w-xs text-sm leading-relaxed text-[var(--text-muted)]"
+            style={{ animationDelay: "300ms" }}
+          >
             {profile.tagline}
           </p>
 
-          <nav className="mt-14">
+          <nav className="fade-up mt-14" style={{ animationDelay: "400ms" }}>
             <ul className="flex flex-col gap-4">
               {nav.map((item, i) => {
                 const isActive = active === item.id;
@@ -120,9 +156,9 @@ export default function Sidebar() {
                       className="group flex items-center gap-3"
                     >
                       <span
-                        className={`h-px transition-all ${
+                        className={`h-px transition-all duration-300 ease-out ${
                           isActive
-                            ? "w-10 bg-[var(--accent)]"
+                            ? "w-14 bg-[var(--accent)]"
                             : "w-5 bg-[var(--border-strong)] group-hover:w-10 group-hover:bg-[var(--text-muted)]"
                         }`}
                       />
@@ -155,20 +191,24 @@ export default function Sidebar() {
             href={profile.resumeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-10 inline-flex items-center gap-2 rounded border border-[var(--border-strong)] px-4 py-2.5 text-sm font-medium text-[var(--text)] transition-colors hover:border-[var(--accent)]/60 hover:text-[var(--accent)]"
+            style={{ animationDelay: "500ms" }}
+            className="fade-up btn-shine group mt-10 inline-flex items-center gap-2 rounded-full border border-[var(--border-strong)] px-5 py-2.5 text-sm font-medium text-[var(--text)] transition-colors hover:border-[var(--accent)]/60 hover:text-[var(--accent)]"
           >
-            <ExternalLinkIcon className="h-4 w-4" />
+            <ExternalLinkIcon className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             View Resume
           </a>
         </div>
 
-        <div className="flex items-center gap-5 text-[var(--text-muted)]">
+        <div
+          className="fade-up flex items-center gap-5 text-[var(--text-muted)]"
+          style={{ animationDelay: "600ms" }}
+        >
           <a
             href={profile.github}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
-            className="transition-colors hover:text-[var(--accent)]"
+            className="transition-all duration-200 hover:-translate-y-1 hover:text-[var(--accent)]"
           >
             <GithubIcon className="h-5 w-5" />
           </a>
@@ -177,14 +217,14 @@ export default function Sidebar() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            className="transition-colors hover:text-[var(--accent)]"
+            className="transition-all duration-200 hover:-translate-y-1 hover:text-[var(--accent)]"
           >
             <LinkedinIcon className="h-5 w-5" />
           </a>
           <a
             href={`mailto:${profile.email}`}
             aria-label="Email"
-            className="transition-colors hover:text-[var(--accent)]"
+            className="transition-all duration-200 hover:-translate-y-1 hover:text-[var(--accent)]"
           >
             <MailIcon className="h-5 w-5" />
           </a>

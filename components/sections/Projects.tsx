@@ -13,9 +13,9 @@ export default function Projects() {
       <div className="max-w-2xl space-y-4">
         {projects.map((project, i) => (
           <Reveal delay={i * 100} key={project.name}>
-            <div className="rounded-lg border border-[var(--border)] bg-[var(--bg-elevated)] p-6 transition-colors hover:border-[var(--accent)]/40">
+            <div className="spotlight-card group rounded-xl border border-[var(--border)] bg-[var(--bg-elevated)]/70 p-6 backdrop-blur-sm">
               <div className="flex items-start justify-between gap-4">
-                <h3 className="text-lg font-semibold text-[var(--text-strong)]">
+                <h3 className="text-lg font-semibold text-[var(--text-strong)] transition-colors group-hover:text-[var(--accent)]">
                   {project.name}
                 </h3>
                 {"liveUrl" in project && project.liveUrl && (
@@ -23,10 +23,10 @@ export default function Projects() {
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex shrink-0 items-center gap-1 font-mono text-xs text-[var(--accent)] transition-colors hover:opacity-80"
+                    className="group/link inline-flex shrink-0 items-center gap-1 rounded-full border border-[var(--accent)]/40 px-3 py-1 font-mono text-xs text-[var(--accent)] transition-colors hover:bg-[var(--accent)]/10"
                   >
                     Live site
-                    <ExternalLinkIcon className="h-3.5 w-3.5" />
+                    <ExternalLinkIcon className="h-3.5 w-3.5 transition-transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5" />
                   </a>
                 )}
               </div>
@@ -37,7 +37,7 @@ export default function Projects() {
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full border border-[var(--border-strong)] px-3 py-1 font-mono text-xs text-[var(--text-muted)]"
+                    className="rounded-full bg-[var(--accent)]/10 px-3 py-1 font-mono text-xs text-[var(--accent)]"
                   >
                     {tag}
                   </span>
@@ -52,10 +52,12 @@ export default function Projects() {
             href={profile.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 font-mono text-sm text-[var(--accent)] transition-colors hover:opacity-80"
+            className="group inline-flex items-center gap-2 font-mono text-sm text-[var(--accent)]"
           >
-            More on GitHub
-            <ExternalLinkIcon className="h-4 w-4" />
+            <span className="bg-gradient-to-r from-[var(--accent)] to-[var(--accent)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat pb-0.5 transition-[background-size] duration-300 group-hover:bg-[length:100%_1px]">
+              More on GitHub
+            </span>
+            <ExternalLinkIcon className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
           </a>
         </Reveal>
       </div>

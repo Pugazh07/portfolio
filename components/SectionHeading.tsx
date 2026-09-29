@@ -11,7 +11,10 @@ export default function SectionHeading({
         {index}.
       </span>
       {title}
-      <span className="ml-4 hidden h-px flex-1 bg-[var(--border)] sm:block" aria-hidden />
+      <span
+        className="ml-4 hidden h-px flex-1 bg-gradient-to-r from-[var(--accent)]/60 via-[var(--border)] to-transparent sm:block"
+        aria-hidden
+      />
     </h2>
   );
 }
